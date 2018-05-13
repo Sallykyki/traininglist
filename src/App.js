@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Traininglist from "./Traininglist";
+import Home from "./Home";
+import Customer from "./Customer";
+import Training from "./Training";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Training list</h1>
-        </header>
-        <Traininglist />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/customer" component={Customer} />
+          <Route exact path="/training" component={Training} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
