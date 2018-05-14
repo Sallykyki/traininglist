@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { toast } from "react-toastify";
@@ -62,9 +63,41 @@ class Customer extends Component {
     console.log(customers);
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Customer list</h1>
-        </header>
+        <nav className="navbar navbar-expand-lg navbar-light ">
+          <a class="navbar-brand" href="#">
+            Personal Trainer
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item ">
+                <Link to="/customer" className="nav-link">
+                  Customer list
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/training" className="nav-link">
+                  Training list
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/calendar" className="nav-link">
+                  Calendar
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
         <AddCustomer addCustomer={this.addCustomer} />
         <ReactTable
           data={customers}
@@ -101,7 +134,7 @@ class Customer extends Component {
               accessor: "links",
               Cell: ({ value }) => (
                 <button
-                  className="btn btn-default btn-link"
+                  className="btn btn-default btn-link del-link"
                   onClick={() => {
                     const link = value.find(l => l.rel === "self");
                     this.onDelClick(link.href);
@@ -112,6 +145,7 @@ class Customer extends Component {
               )
             }
           ]}
+          defaultPageSize={10}
         />
       </div>
     );

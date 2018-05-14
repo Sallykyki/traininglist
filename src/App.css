@@ -14,6 +14,14 @@
   color: white;
 }
 
+.navbar-light {
+  background-color: #008080;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+  color: #fff;
+}
 .App-title {
   font-size: 1.5em;
 }
@@ -21,7 +29,14 @@
 .App-intro {
   font-size: large;
 }
+.del-link {
+  color: red;
+}
 
+.btn-primary {
+  background-color: #008080;
+  border: #008080;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

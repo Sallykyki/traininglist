@@ -1,0 +1,22 @@
+.rbc-calendar {
+  height: 80vh;
+  margin-top: 20px;
+}
+.rbc-toolbar-label {
+  font-weight: bolder;
+  color: #008080;
+}
+.rbc-event-content,
+.rbc-event {
+  background-color: #008080;
+}
+.rbc-toolbar button.rbc-active,
+.rbc-toolbar button:hover {
+  background-color: #008080;
+  color: #fff;
+}
+.rbc-toolbar button.rbc-active:focus {
+  background-color: #008080;
+  color: #fff;
+  outline: none;
+}
