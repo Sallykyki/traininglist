@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css";
+import Navbar from "./Navbar";
 
 BigCalendar.momentLocalizer(moment);
 
-class Calender extends Component {
+class Calendar extends Component {
   state = { trainings: [] };
 
   componentDidMount() {
@@ -36,41 +36,7 @@ class Calender extends Component {
     const { trainings } = this.state;
     return (
       <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light ">
-          <a class="navbar-brand" href="#">
-            Personal Trainer
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item ">
-                <Link to="/customer" className="nav-link">
-                  Customer list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/training" className="nav-link">
-                  Training list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/calendar" className="nav-link">
-                  Calendar
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <Navbar />
         <div className="container">
           <BigCalendar
             defaultDate={new Date()}
@@ -84,4 +50,4 @@ class Calender extends Component {
     );
   }
 }
-export default Calender;
+export default Calendar;

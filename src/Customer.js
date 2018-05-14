@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import "react-confirm-alert/src/react-confirm-alert.css";
+import Navbar from "./Navbar";
 import AddCustomer from "./AddCustomer";
+import EditCustomer from "./EditCustomer";
 
 class Customer extends Component {
   state = { customers: [], trainings: [] };
@@ -29,6 +31,16 @@ class Customer extends Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCustomer)
+    })
+      .then(res => this.loadCustomers())
+      .catch(err => console.error(err));
+  };
+
+  updateCustomer = (link, customer) => {
+    fetch(link, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(customer)
     })
       .then(res => this.loadCustomers())
       .catch(err => console.error(err));
@@ -63,41 +75,7 @@ class Customer extends Component {
     console.log(customers);
     return (
       <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light ">
-          <a class="navbar-brand" href="#">
-            Personal Trainer
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item ">
-                <Link to="/customer" className="nav-link">
-                  Customer list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/training" className="nav-link">
-                  Training list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/calendar" className="nav-link">
-                  Calendar
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <Navbar />
         <AddCustomer addCustomer={this.addCustomer} />
         <ReactTable
           data={customers}
@@ -113,7 +91,7 @@ class Customer extends Component {
             },
             {
               Header: "Street address",
-              accessor: "Street address"
+              accessor: "streetaddress"
             },
             {
               Header: "Post code",
@@ -126,6 +104,22 @@ class Customer extends Component {
             {
               Header: "Phone",
               accessor: "phone"
+            },
+            {
+              id: "button",
+              sortabble: false,
+              filerable: false,
+              accessor: "links",
+              Cell: ({ row, value }) => {
+                const link = value.find(l => l.rel === "self");
+                return (
+                  <EditCustomer
+                    updateCustomer={this.updateCustomer}
+                    link={link.href}
+                    customer={row}
+                  />
+                );
+              }
             },
             {
               id: "button",
@@ -147,6 +141,7 @@ class Customer extends Component {
           ]}
           defaultPageSize={10}
         />
+        <ToastContainer />
       </div>
     );
   }

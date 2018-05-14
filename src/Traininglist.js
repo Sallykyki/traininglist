@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Navbar from "./Navbar";
 
 class Traininglist extends Component {
   state = { trainings: [] };
@@ -23,18 +24,17 @@ class Traininglist extends Component {
 
     trainings.map(t => {
       t.date = new Date(t.date).toDateString();
-      t.customer.address = `${t.customer.streetaddress}  
-        ${t.customer.postcode}`;
     });
 
     return (
-      <div className="container">
+      <div className="App">
+        <Navbar />
         <ReactTable
           data={trainings}
           filterable
           columns={[
             {
-              Header: "Trainings ",
+              Header: "Trainings",
               columns: [
                 {
                   Header: "Id",
@@ -57,7 +57,7 @@ class Traininglist extends Component {
               ]
             },
             {
-              Header: "Customer ",
+              Header: "Customer",
               columns: [
                 {
                   Header: "Id",
@@ -71,21 +71,6 @@ class Traininglist extends Component {
                 {
                   Header: "Last name",
                   accessor: "customer.lastname"
-                },
-                {
-                  Header: "Email",
-                  accessor: "customer.email",
-                  width: 200
-                },
-                {
-                  Header: "Phone",
-                  accessor: "customer.phone",
-                  width: 150
-                },
-                {
-                  Header: "Address",
-                  accessor: "customer.address",
-                  minWidth: 200
                 }
               ]
             }

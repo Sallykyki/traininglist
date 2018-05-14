@@ -32,7 +32,9 @@
 .del-link {
   color: red;
 }
-
+.edit-link {
+  color: #008080;
+}
 .btn-primary {
   background-color: #008080;
   border: #008080;

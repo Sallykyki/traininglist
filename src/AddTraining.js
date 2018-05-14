@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SkyLight from "react-skylight";
+import moment from "moment";
 
 class AddTraining extends Component {
   constructor(props) {
@@ -21,7 +22,10 @@ class AddTraining extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const newTraining = {
-      date: this.state.date,
+      date: moment(
+        this.state.date,
+        moment.HTML5_FMT.DATETIME_LOCAL
+      ).toISOString(),
       activity: this.state.activity,
       duration: this.state.duration,
       customer:
@@ -29,6 +33,12 @@ class AddTraining extends Component {
         this.state.customer
     };
     this.props.addTraining(newTraining);
+    this.setState({
+      date: "",
+      activity: "",
+      duration: "",
+      customer: ""
+    });
     this.simpleDialog.hide();
   };
   render() {
@@ -45,6 +55,8 @@ class AddTraining extends Component {
                 placeholder="Date"
                 className="form-control"
                 name="date"
+                type="datetime-local"
+                value={this.state.date}
                 onChange={this.handleChange}
               />
             </div>
@@ -53,6 +65,7 @@ class AddTraining extends Component {
                 placeholder="Activity"
                 className="form-control"
                 name="activity"
+                value={this.state.activity}
                 onChange={this.handleChange}
               />
             </div>
@@ -61,6 +74,7 @@ class AddTraining extends Component {
                 placeholder="Duration"
                 className="form-control"
                 name="duration"
+                value={this.state.duration}
                 onChange={this.handleChange}
               />
             </div>
@@ -69,6 +83,7 @@ class AddTraining extends Component {
                 placeholder="Customer id"
                 className="form-control"
                 name="customer"
+                value={this.state.customer}
                 onChange={this.handleChange}
               />
             </div>

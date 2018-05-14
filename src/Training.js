@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import Navbar from "./Navbar";
 import AddTraining from "./AddTraining";
+import moment from "moment";
 
 class Training extends Component {
   state = { trainings: [] };
@@ -61,45 +62,11 @@ class Training extends Component {
   render() {
     const { trainings } = this.state;
     trainings.map(t => {
-      t.date = new Date(t.date).toDateString();
+      t.date = moment(t.date).format("YYYY-MM-DD, HH:mm:ss");
     });
     return (
       <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light ">
-          <a class="navbar-brand" href="#">
-            Personal Trainer
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item ">
-                <Link to="/customer" className="nav-link">
-                  Customer list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/training" className="nav-link">
-                  Training list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/calendar" className="nav-link">
-                  Calendar
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <Navbar />
         <AddTraining addTraining={this.addTraining} />
         <ReactTable
           data={trainings}
@@ -137,6 +104,7 @@ class Training extends Component {
           ]}
           defaultPageSize={10}
         />
+        <ToastContainer />
       </div>
     );
   }

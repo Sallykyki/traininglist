@@ -4,6 +4,7 @@ import Home from "./Home";
 import Customer from "./Customer";
 import Training from "./Training";
 import Calendar from "./Calendar";
+import Traininglist from "./Traininglist";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route exact path="/customer" component={Customer} />
           <Route exact path="/training" component={Training} />
           <Route exact path="/calendar" component={Calendar} />
+          <Route exact path="/gettraining" component={Traininglist} />
         </Switch>
       </BrowserRouter>
     );

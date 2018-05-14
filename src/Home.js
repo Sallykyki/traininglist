@@ -1,45 +1,37 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 class Home extends Component {
   render() {
     return (
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light ">
-          <a class="navbar-brand" href="#">
-            Personal Trainer
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item ">
-                <Link to="/customer" className="nav-link">
-                  Customer list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/training" className="nav-link">
-                  Training list
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/calendar" className="nav-link">
-                  Calendar
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+      <div>
+        <Navbar />
+        <div className="container">
+          <p>Hello, I'm Huong Pham. My student number is 1600026.</p>
+          <p>
+            This is project for Personal Trainer company which manages info
+            about their customers and trainings. This web app contains 4 pages:
+          </p>
+          <ul>
+            <li>
+              <Link to="/gettraining">Customers &#38; Trainings page </Link>
+              shows the relationship between customers and trainings.
+            </li>
+            <li>
+              <Link to="/customer">Customers page</Link> shows info of
+              customers.
+            </li>
+            <li>
+              <Link to="/training">Trainings page</Link> shows info of
+              trainings.
+            </li>
+            <li>
+              <Link to="/calendar">Calendar page</Link> shows schedule of
+              trainings.
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
